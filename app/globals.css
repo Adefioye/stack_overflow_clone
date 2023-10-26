@@ -38,7 +38,7 @@ body {
   }
 
   .markdown {
-    @apply max-w-full prose dark:prose-p:text-light-700 dark:prose-p:text-light-700;
+    @apply max-w-full prose dark:prose-p:text-light-700 dark:prose-p:text-light-600;
   }
 
   .primary-gradient {
