@@ -29,7 +29,6 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body className={`${inter.variable} ${spaceGrotesk.variable}`}>
-        <h1 className="h1-bold">This is beginning of the text</h1>
         <ClerkProvider
           appearance={{
             elements: {
