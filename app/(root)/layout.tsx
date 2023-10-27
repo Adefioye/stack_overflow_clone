@@ -1,7 +1,7 @@
-import Navbar from "@/components/navbar/Navbar";
+import Navbar from "@/components/shared/navbar/Navbar";
 import React, { PropsWithChildren } from "react";
 
-const Layout = ({ children }: PropsWithChildren) => {
+const RootLayout = ({ children }: PropsWithChildren) => {
   return (
     <main className="background-light850_dark100 relative">
       <Navbar />
@@ -17,4 +17,4 @@ const Layout = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default Layout;
+export default RootLayout;
