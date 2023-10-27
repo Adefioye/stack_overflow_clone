@@ -95,7 +95,7 @@
   }
 
   .light-border-2 {
-    @apply border-light-700 dark:border-dark-400!important;
+    @apply border-light-700 dark:border-dark-400 !important;
   }
 
   .h1-bold {
