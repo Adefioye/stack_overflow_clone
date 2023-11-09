@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,8 +19,9 @@ import { Button } from "../ui/button";
 import { QuestionsSchema } from "@/lib/validations";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
-// import { createQuestion, editQuestion } from '@/lib/actions/question.action';
 import { useTheme } from "@/context/ThemeProvider";
+import { createQuestion } from "@/lib/actions/question.action";
+import { usePathname, useRouter } from "next/navigation";
 
 interface Props {
   type?: string;
@@ -31,6 +33,8 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
   const { mode } = useTheme();
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
+  const pathName = usePathname();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof QuestionsSchema>>({
@@ -47,11 +51,16 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
     setIsSubmitting(true);
 
     try {
-      if (type === "Edit") {
-        //
-      } else {
-        //
-      }
+      // Make an async call to API -> create a question
+      await createQuestion({
+        title: values.title,
+        content: values.explanation,
+        tags: values.tags,
+        author: JSON.parse(mongoUserId)
+      });
+
+      // Navigate to home page
+      router.push("/");
     } catch (error) {
     } finally {
       setIsSubmitting(false);
