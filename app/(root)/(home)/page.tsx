@@ -7,89 +7,11 @@ import NoResult from "@/components/shared/NoResult";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filters";
-// import {
-//   getQuestions,
-//   getRecommendedQuestions,
-// } from "@/lib/actions/question.action";
-// import { SearchParamsProps } from "@/types";
+import { getQuestions } from "@/lib/actions/question.action";
 import Link from "next/link";
 
-export default function Home() {
-  const questions = [
-    {
-      _id: "6368f9d6-04fa-443e-8c75-469834170b56",
-      title: "How do I deploy a React application to production?",
-      tags: [
-        {
-          _id: "6368f9d6-04fa-443e-8c75-469834170b57",
-          name: "react",
-        },
-        {
-          _id: "6368f9d6-04fa-443e-8c75-469834170b58",
-          name: "deployment",
-        },
-      ],
-      author: {
-        _id: "6368f9d6-04fa-443e-8c75-469834170b59",
-        name: "Jane Doe",
-        picture: "https://example.com/avatar2.png",
-      },
-      upvotes: 20,
-      views: 200,
-      answers: [],
-      createdAt: new Date("2023-10-30T01:00:00.000Z"),
-      clerkId: "6368f9d6-04fa-443e-8c75-469834170b60",
-    },
-    {
-      _id: "6368f9d6-04fa-443e-8c75-469834170b61",
-      title:
-        "What is the difference between a class component and a functional component in React?",
-      tags: [
-        {
-          _id: "6368f9d6-04fa-443e-8c75-469834170b62",
-          name: "react",
-        },
-        {
-          _id: "6368f9d6-04fa-443e-8c75-469834170b63",
-          name: "components",
-        },
-      ],
-      author: {
-        _id: "6368f9d6-04fa-443e-8c75-469834170b64",
-        name: "Peter Smith",
-        picture: "https://example.com/avatar3.png",
-      },
-      upvotes: 30,
-      views: 300,
-      answers: [],
-      createdAt: new Date("2023-10-30T02:00:00.000Z"),
-      clerkId: null,
-    },
-    {
-      _id: "6368f9d6-04fa-443e-8c75-469834170b65",
-      title: "How do I use hooks in React?",
-      tags: [
-        {
-          _id: "6368f9d6-04fa-443e-8c75-469834170b66",
-          name: "react",
-        },
-        {
-          _id: "6368f9d6-04fa-443e-8c75-469834170b67",
-          name: "hooks",
-        },
-      ],
-      author: {
-        _id: "6368f9d6-04fa-443e-8c75-469834170b68",
-        name: "Mary Johnson",
-        picture: "https://example.com/avatar4.png",
-      },
-      upvotes: 30,
-      views: 300,
-      answers: [],
-      createdAt: new Date("2023-10-30T02:00:00.000Z"),
-      clerkId: null,
-    },
-  ];
+export default async function Home() {
+  const result = await getQuestions({});
 
   return (
     <>
@@ -122,8 +44,8 @@ export default function Home() {
       <HomeFilters />
 
       <div className="mt-10 flex w-full flex-col gap-6">
-        {questions.length > 0 ? (
-          questions.map((question) => (
+        {result.questions.length > 0 ? (
+          result.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}
